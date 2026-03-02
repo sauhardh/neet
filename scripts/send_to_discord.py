@@ -3,21 +3,13 @@ import requests
 from typing import List
 import sys
 
-# WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL")
-
-WEBHOOK_URL = "https://discord.com/api/webhooks/1478077262912815166/OHdNRwyiV6FuqwPxv09s5MZxI8bWziXOGw-WEcXrhtWt50DnfPvar5MRKdzMURK7cesE"
+WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL")
 
 author = os.environ.get("AUTHOR")
 commit_message = os.environ.get("COMMIT_MESSAGE")
 commit_sha = os.environ.get("COMMIT_SHA")
 changed_files = os.environ.get("FILES")
 repo = os.environ.get("REPO_NAME")
-
-print(author)
-print(commit_message)
-print(commit_sha)
-print(changed_files)
-print(repo)
 
 commit_link = (
     f"https://github.com/{author}/{repo}/commit/{commit_sha}" if commit_sha else "N/A"
@@ -52,7 +44,6 @@ def send_to_discord():
             ],
             "footer": {"text": "NeetCode Daily Challenge 💡"},
         }
-        print("embed", embed)
         embeds.append(embed)
 
     payload = {"content": "", "embeds": embeds}
