@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Get latest commit info
         id: commit
@@ -18,7 +20,7 @@ jobs:
           echo "COMMIT_SHA=$(git rev-parse HEAD)" >> $GITHUB_ENV
           echo "COMMIT_MESSAGE=$(git log -1 --pretty=%B)" >> $GITHUB_ENV
           echo "AUTHOR=$(git log -1 --pretty=%an)" >> $GITHUB_ENV
-          CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r HEAD)
+          CHANGED_FILES=$(git diff-tree --name-only ${{ github.event.before }} ${{ github.sha }} )
           echo "FILES=$CHANGED_FILES" >> $GITHUB_ENV
 
       - name: Run Discord Script
