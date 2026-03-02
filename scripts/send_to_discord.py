@@ -34,6 +34,7 @@ def send_to_discord():
 
     for file in list_files:
         parts = file.split("/")
+
         if len(parts) < 2:
             continue
 
@@ -51,6 +52,7 @@ def send_to_discord():
             ],
             "footer": {"text": "NeetCode Daily Challenge 💡"},
         }
+        print("embed", embed)
         embeds.append(embed)
 
     payload = {"content": "", "embeds": embeds}
