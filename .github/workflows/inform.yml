@@ -1,0 +1,32 @@
+name: Share on discord
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  send-discord:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Get latest commit info
+        id: commit
+        run: |
+          echo "COMMIT_SHA=$(git rev-parse HEAD)" >> $GITHUB_ENV
+          echo "COMMIT_MESSAGE=$(git log -1 --pretty=%B)" >> $GITHUB_ENV
+          echo "AUTHOR=$(git log -1 --pretty=%an)" >> $GITHUB_ENV
+          CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r HEAD)
+          echo "FILES=$CHANGED_FILES" >> $GITHUB_ENV
+
+      - name: Run Discord Script
+        run: python scripts/send_to_discord.py
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          AUTHOR: ${{ env.AUTHOR }}
+          COMMIT_MESSAGE: ${{ env.COMMIT_MESSAGE }}
+          COMMIT_SHA: ${{ env.COMMIT_SHA }}
+          FILES: ${{ env.FILES }}
+          REPO_NAME: ${{ github.repository }}
