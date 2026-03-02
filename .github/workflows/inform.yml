@@ -21,7 +21,9 @@ jobs:
           echo "COMMIT_MESSAGE=$(git log -1 --pretty=%B)" >> $GITHUB_ENV
           echo "AUTHOR=$(git log -1 --pretty=%an)" >> $GITHUB_ENV
           CHANGED_FILES=$(git diff-tree --name-only ${{ github.event.before }} ${{ github.sha }} )
-          echo "FILES=$CHANGED_FILES" >> $GITHUB_ENV
+          echo "FILES<<EOF" >> $GITHUB_ENV
+          echo "$CHANGED_FILES" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
 
       - name: Run Discord Script
         run: python scripts/send_to_discord.py
