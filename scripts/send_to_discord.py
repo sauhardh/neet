@@ -34,7 +34,7 @@ def send_to_discord():
 
         embed = {
             "title": f"📝 Solved `{title}`",
-            "url": commit_link,
+            "url": f"{commit_link}",
             "description": f"**Author:** {author}\n**Commit:** `{commit_message}`",
             "color": 0x347C1B,
             "fields": [
@@ -44,6 +44,7 @@ def send_to_discord():
             ],
             "footer": {"text": "NeetCode Daily Challenge 💡"},
         }
+
         embeds.append(embed)
 
     payload = {"content": "", "embeds": embeds}
