@@ -34,7 +34,7 @@ def send_to_discord():
             "title": f"📝 Solved `{title}`",
             "url": commit_link,
             "description": f"**Author:** {author}\n**Commit:** `{commit_message}`",
-            "color": 0x347C1B,
+            "color": 0x1ABC9C,
             "fields": [
                 {"name": "Scheme", "value": parts[0], "inline": True},
                 {"name": "Topic", "value": parts[1], "inline": True},
