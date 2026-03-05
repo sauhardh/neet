@@ -44,4 +44,4 @@ if __name__ == "__main__":
         [".", ".", ".", ".", "8", ".", ".", "7", "9"],
     ]
     output = Solution().isValidSudoku(board)
-    print("output", output)
+    print("output,", output)
